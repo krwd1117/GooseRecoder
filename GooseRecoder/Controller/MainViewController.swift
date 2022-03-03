@@ -6,11 +6,17 @@
 //
 
 import UIKit
+import CoreLocation
 import SnapKit
 
 class MainViewController: UIViewController {
     
     // MARK: - Properties
+    var locationManager: CLLocationManager!
+    
+    var currentLocation: CLLocation?
+    var address: [CLPlacemark]?
+    
     lazy var tableView : UITableView = {
         let tb = UITableView()
         tb.backgroundColor = .white
@@ -21,7 +27,7 @@ class MainViewController: UIViewController {
     }()
     
     lazy var recordButton: UIButton = {
-      let button = UIButton()
+        let button = UIButton()
         button.layer.cornerRadius = 20
         button.backgroundColor = UIColor(rgb: 0xFE8D90) //FF5276
         button.addTarget(self, action: #selector(recordButtonTapped), for: .touchUpInside)
@@ -35,11 +41,20 @@ class MainViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = UIColor(rgb:0x1c252e)
         
+        locationManager = CLLocationManager()
+        locationManager.delegate = self
+        
+        configure()
         configureNavigation()
         configureLayout()
     }
-    
+
     // MARK: - configure
+    
+    func configure() {
+        tableView.register(MainTableViewCell.self, forCellReuseIdentifier: "MainTableViewCell")
+    }
+    
     func configureNavigation() {
         // 왼쪽 버튼
         navigationItem.leftBarButtonItem = UIBarButtonItem(
@@ -77,8 +92,21 @@ class MainViewController: UIViewController {
     }
     
     @objc func recordButtonTapped() {
-        print(" 기록 ")
+        locationManager.requestWhenInUseAuthorization()
+        guard let currentLocation = locationManager.location else { return }
+        let latitude = currentLocation.coordinate.latitude
+        let longitude = currentLocation.coordinate.longitude
+        AddressService.fetchAddress(lat: latitude, lon: longitude) { address in
+            self.address = address
+            
+            print(address.last?.locality) // 여수시
+            print(address.last?.subLocality) // 돌산읍
+            print(address.last?.thoroughfare) // 강남해안로
+            print(address.last?.subThoroughfare) // 74
+        }
     }
+    
+    // MARK: - Helpers
 }
 
 
