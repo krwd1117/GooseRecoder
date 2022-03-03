@@ -13,6 +13,12 @@
 		28720B7027D041A6001A1EAB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 28720B6E27D041A6001A1EAB /* Main.storyboard */; };
 		28720B7227D041A7001A1EAB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 28720B7127D041A7001A1EAB /* Assets.xcassets */; };
 		28720B7527D041A7001A1EAB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 28720B7327D041A7001A1EAB /* LaunchScreen.storyboard */; };
+		28720B8827D0421A001A1EAB /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28720B8727D0421A001A1EAB /* Extension.swift */; };
+		28720B8B27D043DA001A1EAB /* MonthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28720B8A27D043DA001A1EAB /* MonthView.swift */; };
+		288EC01E27D06C83000171DE /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288EC01D27D06C83000171DE /* MainViewController.swift */; };
+		288EC02027D06FB2000171DE /* MainViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288EC01F27D06FB2000171DE /* MainViewController+Extension.swift */; };
+		288EC02327D06FD8000171DE /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 288EC02227D06FD8000171DE /* SnapKit */; };
+		288EC02527D07855000171DE /* Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288EC02427D07855000171DE /* Record.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +30,11 @@
 		28720B7127D041A7001A1EAB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		28720B7427D041A7001A1EAB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		28720B7627D041A7001A1EAB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		28720B8727D0421A001A1EAB /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
+		28720B8A27D043DA001A1EAB /* MonthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthView.swift; sourceTree = "<group>"; };
+		288EC01D27D06C83000171DE /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		288EC01F27D06FB2000171DE /* MainViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainViewController+Extension.swift"; sourceTree = "<group>"; };
+		288EC02427D07855000171DE /* Record.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Record.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +42,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				288EC02327D06FD8000171DE /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -56,6 +68,12 @@
 		28720B6727D041A6001A1EAB /* GooseRecoder */ = {
 			isa = PBXGroup;
 			children = (
+				28720B8127D041C4001A1EAB /* Model */,
+				28720B7C27D041AE001A1EAB /* ViewModel */,
+				28720B8627D041F5001A1EAB /* View */,
+				28720B8527D041F3001A1EAB /* Controller */,
+				28720B8427D041F1001A1EAB /* API */,
+				28720B8327D041EF001A1EAB /* Utils */,
 				28720B6827D041A6001A1EAB /* AppDelegate.swift */,
 				28720B6A27D041A6001A1EAB /* SceneDelegate.swift */,
 				28720B6C27D041A6001A1EAB /* ViewController.swift */,
@@ -65,6 +83,61 @@
 				28720B7627D041A7001A1EAB /* Info.plist */,
 			);
 			path = GooseRecoder;
+			sourceTree = "<group>";
+		};
+		28720B7C27D041AE001A1EAB /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		28720B8127D041C4001A1EAB /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				288EC02427D07855000171DE /* Record.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		28720B8327D041EF001A1EAB /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				28720B8727D0421A001A1EAB /* Extension.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		28720B8427D041F1001A1EAB /* API */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		28720B8527D041F3001A1EAB /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				288EC01D27D06C83000171DE /* MainViewController.swift */,
+				288EC01F27D06FB2000171DE /* MainViewController+Extension.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		28720B8627D041F5001A1EAB /* View */ = {
+			isa = PBXGroup;
+			children = (
+				28720B8927D043CF001A1EAB /* Calendar */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		28720B8927D043CF001A1EAB /* Calendar */ = {
+			isa = PBXGroup;
+			children = (
+				28720B8A27D043DA001A1EAB /* MonthView.swift */,
+			);
+			path = Calendar;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -83,6 +156,9 @@
 			dependencies = (
 			);
 			name = GooseRecoder;
+			packageProductDependencies = (
+				288EC02227D06FD8000171DE /* SnapKit */,
+			);
 			productName = GooseRecoder;
 			productReference = 28720B6527D041A6001A1EAB /* GooseRecoder.app */;
 			productType = "com.apple.product-type.application";
@@ -111,6 +187,9 @@
 				Base,
 			);
 			mainGroup = 28720B5C27D041A6001A1EAB;
+			packageReferences = (
+				288EC02127D06FD8000171DE /* XCRemoteSwiftPackageReference "SnapKit" */,
+			);
 			productRefGroup = 28720B6627D041A6001A1EAB /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -138,9 +217,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				288EC02527D07855000171DE /* Record.swift in Sources */,
 				28720B6D27D041A6001A1EAB /* ViewController.swift in Sources */,
+				28720B8B27D043DA001A1EAB /* MonthView.swift in Sources */,
+				288EC02027D06FB2000171DE /* MainViewController+Extension.swift in Sources */,
 				28720B6927D041A6001A1EAB /* AppDelegate.swift in Sources */,
+				288EC01E27D06C83000171DE /* MainViewController.swift in Sources */,
 				28720B6B27D041A6001A1EAB /* SceneDelegate.swift in Sources */,
+				28720B8827D0421A001A1EAB /* Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -360,6 +444,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		288EC02127D06FD8000171DE /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				branch = develop;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		288EC02227D06FD8000171DE /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 288EC02127D06FD8000171DE /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 28720B5D27D041A6001A1EAB /* Project object */;
 }
