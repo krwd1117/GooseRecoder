@@ -9,7 +9,7 @@ import UIKit
 
 struct Record {
     
-    let date: Date
-//    let location: 
+//    let date: Date
+    let address: String
     
 }

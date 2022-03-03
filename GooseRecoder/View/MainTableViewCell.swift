@@ -7,24 +7,42 @@
 
 import UIKit
 import SnapKit
+import CoreLocation
 
 class MainTableViewCell: UITableViewCell {
     
     // MARK: - Properties
-    let timeLabel: UILabel = {
+    
+    var time: Date? {
+        didSet {
+            configure()
+        }
+    }
+    
+    var address: String? {
+        didSet{
+            configure()
+        }
+    }
+    
+    lazy var timeLabel: UILabel = {
         let label = UILabel()
-        label.text = "하"
+        label.text = "시간"
+        label.textColor = .label
         return label
     }()
     
-    let addressLabel: UILabel = {
+    lazy var addressLabel: UILabel = {
         let label = UILabel()
+        label.text = "위치"
+        label.textColor = .label
         return label
     }()
     
     // MARK: - LifeCycle
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        configure()
         configureLayout()
     }
     
@@ -33,13 +51,30 @@ class MainTableViewCell: UITableViewCell {
     }
     
     // MARK: - Configure
-    func configureLayout() {
+    
+    func configure() {
         
+        backgroundColor = .systemBackground
+        
+        guard let address = address else {
+            return
+        }
+        
+        addressLabel.text = address
+        
+    }
+    
+    func configureLayout() {
         addSubview(timeLabel)
         timeLabel.snp.makeConstraints {
             $0.centerY.equalToSuperview()
             $0.leading.equalToSuperview().inset(10)
+            
+        addSubview(addressLabel)
+            addressLabel.snp.makeConstraints {
+                $0.centerY.equalToSuperview()
+                $0.trailing.equalToSuperview().inset(10)
+            }
         }
-        
     }
 }

@@ -16,6 +16,9 @@ class MainViewController: UIViewController {
     
     var currentLocation: CLLocation?
     var address: [CLPlacemark]?
+    var addressStr = ""
+    
+    var records: [Record] = []
     
     lazy var tableView : UITableView = {
         let tb = UITableView()
@@ -48,8 +51,8 @@ class MainViewController: UIViewController {
         configureNavigation()
         configureLayout()
     }
-
-    // MARK: - configure
+    
+    // MARK: - Configure
     
     func configure() {
         tableView.register(MainTableViewCell.self, forCellReuseIdentifier: "MainTableViewCell")
@@ -72,15 +75,16 @@ class MainViewController: UIViewController {
     
     func configureLayout() {
         
-        view.addSubview(tableView)
-        tableView.snp.makeConstraints {
-            $0.top.trailing.leading.equalTo(view.safeAreaLayoutGuide).inset(10)
-            $0.height.equalTo(300)
+        let stack = UIStackView(arrangedSubviews: [tableView, recordButton])
+        stack.axis = .vertical
+        stack.spacing = 10
+        
+        view.addSubview(stack)
+        stack.snp.makeConstraints {
+            $0.edges.equalTo(view.safeAreaLayoutGuide).inset(16)
         }
         
-        view.addSubview(recordButton)
         recordButton.snp.makeConstraints {
-            $0.bottom.trailing.leading.equalTo(view.safeAreaLayoutGuide).inset(10)
             $0.height.equalTo(100)
         }
         
@@ -93,20 +97,36 @@ class MainViewController: UIViewController {
     
     @objc func recordButtonTapped() {
         locationManager.requestWhenInUseAuthorization()
+        getAddress()
+    }
+    
+    // MARK: - Helpers
+    func getAddress() {
         guard let currentLocation = locationManager.location else { return }
         let latitude = currentLocation.coordinate.latitude
         let longitude = currentLocation.coordinate.longitude
         AddressService.fetchAddress(lat: latitude, lon: longitude) { address in
             self.address = address
             
-            print(address.last?.locality) // 여수시
-            print(address.last?.subLocality) // 돌산읍
-            print(address.last?.thoroughfare) // 강남해안로
-            print(address.last?.subThoroughfare) // 74
+            let locality = address.last?.locality ?? ""
+            let subLocality = address.last?.subLocality ?? ""
+            let thoroughfare = address.last?.thoroughfare ?? ""
+            let subThoroughfare = address.last?.subThoroughfare ?? ""
+            self.addressStr = "\(locality) \(subLocality) \(thoroughfare) \(subThoroughfare)"
+            
+            self.records.append(Record(address: self.addressStr))
+            
+            
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+
+            //            print(address.last?.locality) // 여수시
+            //            print(address.last?.subLocality) // 돌산읍
+            //            print(address.last?.thoroughfare) // 강남해안로
+            //            print(address.last?.subThoroughfare) // 74
         }
     }
-    
-    // MARK: - Helpers
 }
 
 
