@@ -6,10 +6,17 @@
 //
 
 import UIKit
+import RealmSwift
 
-struct Record {
+class Record: Object {
     
-//    let date: Date
-    let address: String
+    @objc dynamic var uuidString = UUID().uuidString
+    @objc dynamic var address = ""
+    @objc dynamic var date = ""
+    @objc dynamic var time = ""
+    
+    override class func primaryKey() -> String? {
+        return "uuidString"
+    }
     
 }

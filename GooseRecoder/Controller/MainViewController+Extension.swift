@@ -10,23 +10,54 @@ import CoreLocation
 
 // MARK: - UITableViewDelegate
 extension MainViewController: UITableViewDelegate {
-
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let dvc = DetailViewController()
+        present(dvc, animated: true, completion: nil)
+    }
 }
 
 // MARK: - UITableViewDataSource
 extension MainViewController: UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        
+        let uuidString = records[indexPath.row].uuidString
+        
+        do {
+            try realm.write({
+                let predicate = NSPredicate(format: "uuidString = %@", uuidString)
+                realm.delete(realm.objects(Record.self).filter(predicate))
+            })
+        } catch {
+            print(error.localizedDescription)
+        }
+        
+        tableView.deleteRows(at: [indexPath], with: .left)
+        
+    }
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let height = tableView.bounds.height / 7
         return height
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return records.count
+        
+        var count = 0
+        
+        if records.isEmpty {
+            count = 0
+        } else {
+            count = records.count
+        }
+        
+        return count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "MainTableViewCell", for: indexPath) as? MainTableViewCell else { return UITableViewCell()}
-        cell.address = addressStr
+        cell.currentTime = records[indexPath.row].time
+        cell.address = records[indexPath.row].address
         return cell
     }
 }

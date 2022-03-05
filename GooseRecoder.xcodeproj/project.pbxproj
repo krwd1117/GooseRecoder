@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2823514F27D3AB94002D4803 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2823514E27D3AB94002D4803 /* DetailViewController.swift */; };
+		2823515227D3B3F4002D4803 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 2823515127D3B3F4002D4803 /* Realm */; };
+		2823515427D3B3F4002D4803 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 2823515327D3B3F4002D4803 /* RealmSwift */; };
 		28720B6927D041A6001A1EAB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28720B6827D041A6001A1EAB /* AppDelegate.swift */; };
 		28720B6B27D041A6001A1EAB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28720B6A27D041A6001A1EAB /* SceneDelegate.swift */; };
 		28720B6D27D041A6001A1EAB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28720B6C27D041A6001A1EAB /* ViewController.swift */; };
@@ -24,6 +27,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2823514E27D3AB94002D4803 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		28720B6527D041A6001A1EAB /* GooseRecoder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GooseRecoder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		28720B6827D041A6001A1EAB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		28720B6A27D041A6001A1EAB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -46,6 +50,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2823515427D3B3F4002D4803 /* RealmSwift in Frameworks */,
+				2823515227D3B3F4002D4803 /* Realm in Frameworks */,
 				288EC02327D06FD8000171DE /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -125,6 +131,7 @@
 			children = (
 				288EC01D27D06C83000171DE /* MainViewController.swift */,
 				288EC01F27D06FB2000171DE /* MainViewController+Extension.swift */,
+				2823514E27D3AB94002D4803 /* DetailViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -164,6 +171,8 @@
 			name = GooseRecoder;
 			packageProductDependencies = (
 				288EC02227D06FD8000171DE /* SnapKit */,
+				2823515127D3B3F4002D4803 /* Realm */,
+				2823515327D3B3F4002D4803 /* RealmSwift */,
 			);
 			productName = GooseRecoder;
 			productReference = 28720B6527D041A6001A1EAB /* GooseRecoder.app */;
@@ -195,6 +204,7 @@
 			mainGroup = 28720B5C27D041A6001A1EAB;
 			packageReferences = (
 				288EC02127D06FD8000171DE /* XCRemoteSwiftPackageReference "SnapKit" */,
+				2823515027D3B3F4002D4803 /* XCRemoteSwiftPackageReference "realm-swift" */,
 			);
 			productRefGroup = 28720B6627D041A6001A1EAB /* Products */;
 			projectDirPath = "";
@@ -223,6 +233,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2823514F27D3AB94002D4803 /* DetailViewController.swift in Sources */,
 				288EC02527D07855000171DE /* Record.swift in Sources */,
 				28720B6D27D041A6001A1EAB /* ViewController.swift in Sources */,
 				28720B8B27D043DA001A1EAB /* MonthView.swift in Sources */,
@@ -454,6 +465,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		2823515027D3B3F4002D4803 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		288EC02127D06FD8000171DE /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
@@ -465,6 +484,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		2823515127D3B3F4002D4803 /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2823515027D3B3F4002D4803 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = Realm;
+		};
+		2823515327D3B3F4002D4803 /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2823515027D3B3F4002D4803 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
+		};
 		288EC02227D06FD8000171DE /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 288EC02127D06FD8000171DE /* XCRemoteSwiftPackageReference "SnapKit" */;

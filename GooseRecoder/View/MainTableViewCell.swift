@@ -19,6 +19,12 @@ class MainTableViewCell: UITableViewCell {
         }
     }
     
+    var currentTime: String? {
+        didSet {
+            configure()
+        }
+    }
+    
     var address: String? {
         didSet{
             configure()
@@ -36,6 +42,7 @@ class MainTableViewCell: UITableViewCell {
         let label = UILabel()
         label.text = "위치"
         label.textColor = .label
+        label.textAlignment = .center
         return label
     }()
     
@@ -53,13 +60,12 @@ class MainTableViewCell: UITableViewCell {
     // MARK: - Configure
     
     func configure() {
-        
         backgroundColor = .systemBackground
         
-        guard let address = address else {
-            return
-        }
-        
+        guard let currentTime = currentTime else { return }
+        timeLabel.text = currentTime
+
+        guard let address = address else { return }
         addressLabel.text = address
         
     }
@@ -68,11 +74,12 @@ class MainTableViewCell: UITableViewCell {
         addSubview(timeLabel)
         timeLabel.snp.makeConstraints {
             $0.centerY.equalToSuperview()
-            $0.leading.equalToSuperview().inset(10)
+            $0.leading.equalToSuperview().offset(10)
             
         addSubview(addressLabel)
             addressLabel.snp.makeConstraints {
                 $0.centerY.equalToSuperview()
+                $0.leading.equalTo(timeLabel.snp.trailing).offset(10)
                 $0.trailing.equalToSuperview().inset(10)
             }
         }
