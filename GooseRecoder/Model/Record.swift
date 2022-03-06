@@ -16,6 +16,7 @@ class Record: Object {
     @objc dynamic var time = ""
     @objc dynamic var latitude = 0.0
     @objc dynamic var longitude = 0.0
+    @objc dynamic var memo = ""
     
     override class func primaryKey() -> String? {
         return "uuidString"

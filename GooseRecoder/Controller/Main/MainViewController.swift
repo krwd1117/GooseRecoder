@@ -12,6 +12,8 @@ import SnapKit
 import RealmSwift
 import SwiftUI
 
+import FSCalendar
+
 class MainViewController: UIViewController {
     
     // MARK: - Properties
@@ -23,12 +25,6 @@ class MainViewController: UIViewController {
     var records: Results<Record>!
     
     let realm = try! Realm()
-    
-    var addressStr = ""
-    var timeStr = ""
-    var dateStr = getDate(date: Date())
-    var latitude = 0.0
-    var longitude = 0.0
     
     var todayDate = getDate(date: Date())
     var selectedDate = getDate(date: Date())
@@ -45,7 +41,7 @@ class MainViewController: UIViewController {
     lazy var recordButton: UIButton = {
         let button = UIButton()
         button.layer.cornerRadius = 20
-        button.backgroundColor = UIColor(rgb: 0xFE8D90) //FF5276
+        button.backgroundColor = RECORDCOLOR //FF5276
         button.addTarget(self, action: #selector(recordButtonTapped), for: .touchUpInside)
         button.setTitle("기록", for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 20, weight: .bold)
@@ -56,15 +52,24 @@ class MainViewController: UIViewController {
     // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor(rgb:0x1c252e)
+        view.backgroundColor = MAINCOLOR
         
         locationManager = CLLocationManager()
         locationManager.delegate = self
         
         configure()
-        configureLoadRecord()
+        
         configureNavigation()
         configureLayout()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        configureLoadRecord()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let vc = segue.destination as? CalendarViewController else { return }
+        vc.delegate = self
     }
     
     // MARK: - Configure
@@ -74,12 +79,12 @@ class MainViewController: UIViewController {
     }
     
     func configureLoadRecord() {
-        let predicate = NSPredicate(format: "date = %@", dateStr)
+        let predicate = NSPredicate(format: "date = %@", selectedDate)
         records = realm.objects(Record.self).filter(predicate).sorted(byKeyPath: "time", ascending: true)
     }
     
     func configureLoadTest() {
-        let predicate = NSPredicate(format: "date = '2022-03-05'", dateStr)
+        let predicate = NSPredicate(format: "date = '2022-03-05'", selectedDate)
         records = realm.objects(Record.self).filter(predicate).sorted(byKeyPath: "time", ascending: true)
     }
     
@@ -95,7 +100,9 @@ class MainViewController: UIViewController {
         
         // 타이틀
         navigationController?.navigationBar.titleTextAttributes = [ .foregroundColor : UIColor.white ]
-        navigationItem.title = getDate(date: Date())
+        
+        let title = selectedDate.components(separatedBy: "-")
+        navigationItem.title = "\(title[0])년 \(title[1])월 \(title[2])일"
         
         // 오른쪽 버튼
         navigationItem.rightBarButtonItem = UIBarButtonItem(
@@ -110,7 +117,7 @@ class MainViewController: UIViewController {
     func configureLayout() {
         let stack = UIStackView(arrangedSubviews: [tableView, recordButton])
         stack.axis = .vertical
-        stack.spacing = 10
+        stack.spacing = 16
         
         view.addSubview(stack)
         stack.snp.makeConstraints {
@@ -128,7 +135,7 @@ class MainViewController: UIViewController {
     @objc func clearButtonTapped() {
         do{
             try realm.write({
-                let predicate = NSPredicate(format: "date = %@", getDate(date: Date()))
+                let predicate = NSPredicate(format: "date = %@", selectedDate)
                 realm.delete(realm.objects(Record.self).filter(predicate))
             })
         } catch {
@@ -137,25 +144,11 @@ class MainViewController: UIViewController {
         tableView.reloadData()
     }
     
-    // 달력 버튼 클릳
+    // 달력 버튼 클릭
     @objc func calendarButtonTapped() {
-        selectedDate = ""
-        DispatchQueue.main.async {
-            if self.todayDate == self.selectedDate {
-                UIView.transition(with: self.recordButton, duration: 0.4,
-                                  options: .autoreverse,
-                                  animations: {
-                    self.recordButton.isHidden = false
-                })
-            } else {
-                UIView.transition(with: self.recordButton, duration: 0.4,
-                                  options: .transitionFlipFromBottom,
-                                  animations: {
-                    self.recordButton.isHidden = true
-                })
-            }
-        }
-        tableView.reloadData()
+        let cvc = CalendarViewController()
+        cvc.delegate = self
+        present(cvc, animated: true, completion: nil)
     }
     
     // 기록 버튼 클릭

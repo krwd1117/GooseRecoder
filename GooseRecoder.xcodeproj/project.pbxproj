@@ -13,6 +13,10 @@
 		28710B7627D45374009A1D17 /* GlobalFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28710B7527D45374009A1D17 /* GlobalFunctions.swift */; };
 		28710B7827D45E6F009A1D17 /* RecordItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28710B7727D45E6E009A1D17 /* RecordItem.swift */; };
 		28710B7A27D46157009A1D17 /* MapMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28710B7927D46157009A1D17 /* MapMarker.swift */; };
+		28710B7D27D46B89009A1D17 /* FSCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = 28710B7C27D46B89009A1D17 /* FSCalendar */; };
+		28710B8727D471B0009A1D17 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28710B8627D471B0009A1D17 /* CalendarViewController.swift */; };
+		28710B8A27D47263009A1D17 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28710B8927D47263009A1D17 /* Constants.swift */; };
+		28710B8C27D47453009A1D17 /* CalendarViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28710B8B27D47453009A1D17 /* CalendarViewController+Extension.swift */; };
 		28720B6927D041A6001A1EAB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28720B6827D041A6001A1EAB /* AppDelegate.swift */; };
 		28720B6B27D041A6001A1EAB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28720B6A27D041A6001A1EAB /* SceneDelegate.swift */; };
 		28720B6D27D041A6001A1EAB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28720B6C27D041A6001A1EAB /* ViewController.swift */; };
@@ -34,6 +38,9 @@
 		28710B7527D45374009A1D17 /* GlobalFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalFunctions.swift; sourceTree = "<group>"; };
 		28710B7727D45E6E009A1D17 /* RecordItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordItem.swift; sourceTree = "<group>"; };
 		28710B7927D46157009A1D17 /* MapMarker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapMarker.swift; sourceTree = "<group>"; };
+		28710B8627D471B0009A1D17 /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
+		28710B8927D47263009A1D17 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		28710B8B27D47453009A1D17 /* CalendarViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CalendarViewController+Extension.swift"; sourceTree = "<group>"; };
 		28720B6527D041A6001A1EAB /* GooseRecoder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GooseRecoder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		28720B6827D041A6001A1EAB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		28720B6A27D041A6001A1EAB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -57,6 +64,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2823515427D3B3F4002D4803 /* RealmSwift in Frameworks */,
+				28710B7D27D46B89009A1D17 /* FSCalendar in Frameworks */,
 				2823515227D3B3F4002D4803 /* Realm in Frameworks */,
 				288EC02327D06FD8000171DE /* SnapKit in Frameworks */,
 			);
@@ -65,6 +73,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		28710B8827D47205009A1D17 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				288EC01D27D06C83000171DE /* MainViewController.swift */,
+				288EC01F27D06FB2000171DE /* MainViewController+Extension.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		28710B8D27D47DBF009A1D17 /* Calendar */ = {
+			isa = PBXGroup;
+			children = (
+				28710B8627D471B0009A1D17 /* CalendarViewController.swift */,
+				28710B8B27D47453009A1D17 /* CalendarViewController+Extension.swift */,
+			);
+			path = Calendar;
+			sourceTree = "<group>";
+		};
+		28710B8E27D47DC8009A1D17 /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				2823514E27D3AB94002D4803 /* DetailViewController.swift */,
+			);
+			path = Detail;
+			sourceTree = "<group>";
+		};
 		28720B5C27D041A6001A1EAB = {
 			isa = PBXGroup;
 			children = (
@@ -123,6 +157,7 @@
 			children = (
 				28720B8727D0421A001A1EAB /* Extension.swift */,
 				28710B7527D45374009A1D17 /* GlobalFunctions.swift */,
+				28710B8927D47263009A1D17 /* Constants.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -138,9 +173,9 @@
 		28720B8527D041F3001A1EAB /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				288EC01D27D06C83000171DE /* MainViewController.swift */,
-				288EC01F27D06FB2000171DE /* MainViewController+Extension.swift */,
-				2823514E27D3AB94002D4803 /* DetailViewController.swift */,
+				28710B8827D47205009A1D17 /* Main */,
+				28710B8E27D47DC8009A1D17 /* Detail */,
+				28710B8D27D47DBF009A1D17 /* Calendar */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -182,6 +217,7 @@
 				288EC02227D06FD8000171DE /* SnapKit */,
 				2823515127D3B3F4002D4803 /* Realm */,
 				2823515327D3B3F4002D4803 /* RealmSwift */,
+				28710B7C27D46B89009A1D17 /* FSCalendar */,
 			);
 			productName = GooseRecoder;
 			productReference = 28720B6527D041A6001A1EAB /* GooseRecoder.app */;
@@ -214,6 +250,7 @@
 			packageReferences = (
 				288EC02127D06FD8000171DE /* XCRemoteSwiftPackageReference "SnapKit" */,
 				2823515027D3B3F4002D4803 /* XCRemoteSwiftPackageReference "realm-swift" */,
+				28710B7B27D46B89009A1D17 /* XCRemoteSwiftPackageReference "FSCalendar" */,
 			);
 			productRefGroup = 28720B6627D041A6001A1EAB /* Products */;
 			projectDirPath = "";
@@ -242,12 +279,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				28710B8727D471B0009A1D17 /* CalendarViewController.swift in Sources */,
+				28710B8C27D47453009A1D17 /* CalendarViewController+Extension.swift in Sources */,
 				2823514F27D3AB94002D4803 /* DetailViewController.swift in Sources */,
 				28710B7827D45E6F009A1D17 /* RecordItem.swift in Sources */,
 				288EC02527D07855000171DE /* Record.swift in Sources */,
 				28710B7627D45374009A1D17 /* GlobalFunctions.swift in Sources */,
 				28710B7A27D46157009A1D17 /* MapMarker.swift in Sources */,
 				28720B6D27D041A6001A1EAB /* ViewController.swift in Sources */,
+				28710B8A27D47263009A1D17 /* Constants.swift in Sources */,
 				28720B8B27D043DA001A1EAB /* MonthView.swift in Sources */,
 				288EC02027D06FB2000171DE /* MainViewController+Extension.swift in Sources */,
 				288EC02927D08634000171DE /* MainTableViewCell.swift in Sources */,
@@ -485,6 +525,14 @@
 				kind = branch;
 			};
 		};
+		28710B7B27D46B89009A1D17 /* XCRemoteSwiftPackageReference "FSCalendar" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/WenchaoD/FSCalendar";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 		288EC02127D06FD8000171DE /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
@@ -505,6 +553,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 2823515027D3B3F4002D4803 /* XCRemoteSwiftPackageReference "realm-swift" */;
 			productName = RealmSwift;
+		};
+		28710B7C27D46B89009A1D17 /* FSCalendar */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 28710B7B27D46B89009A1D17 /* XCRemoteSwiftPackageReference "FSCalendar" */;
+			productName = FSCalendar;
 		};
 		288EC02227D06FD8000171DE /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;

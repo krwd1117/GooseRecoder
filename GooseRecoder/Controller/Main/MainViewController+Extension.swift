@@ -11,17 +11,19 @@ import CoreLocation
 // MARK: - UITableViewDelegate
 extension MainViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+
         let recordItem = records[indexPath.row]
-        
         let dvc = DetailViewController()
         dvc.recordItem = RecordItem(
+            uuidString: recordItem.uuidString,
             date: recordItem.date,
             time: recordItem.time,
             address: recordItem.address,
             latitude: recordItem.latitude,
-            longitude: recordItem.longitude
+            longitude: recordItem.longitude,
+            memo: recordItem.memo
         )
+        
         present(dvc, animated: true, completion: nil)
     }
 }
@@ -87,5 +89,25 @@ extension MainViewController: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print(error)
+    }
+}
+
+extension MainViewController: CalendarDelegate {
+    func moveDate(date: String) {
+        selectedDate = date
+
+        let title = selectedDate.components(separatedBy: "-")
+        navigationItem.title = "\(title[0])년 \(title[1])월 \(title[2])일"
+        
+        configureLoadRecord()
+        
+        if todayDate == selectedDate {
+            recordButton.isHidden = false
+        } else {
+            recordButton.isHidden = true
+        }
+        
+        tableView.reloadData()
+    
     }
 }

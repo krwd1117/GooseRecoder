@@ -8,11 +8,12 @@
 import UIKit
 
 struct RecordItem {
-    
+    let uuidString: String
     let date: String
     let time: String
     let address: String
     let latitude: Double
     let longitude: Double
+    let memo: String
     
 }
