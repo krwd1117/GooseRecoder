@@ -11,7 +11,10 @@ import CoreLocation
 struct AddressService {
     static func fetchAddress(lat: Double, lon: Double, completion: @escaping (String) -> Void ){
         let data = CLLocation(latitude: lat, longitude: lon)
-        CLGeocoder().reverseGeocodeLocation(data, preferredLocale: Locale(identifier: "Ko-kr")) { place, error in
+        CLGeocoder().reverseGeocodeLocation(
+            data,
+            preferredLocale: Locale(identifier: "Ko-kr")
+        ) { place, error in
             if let address: [CLPlacemark] = place {
                 let locality = address.last?.locality ?? "" // 여수시
                 let subLocality = address.last?.subLocality ?? "" // 돌산읍

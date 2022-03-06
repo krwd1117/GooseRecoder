@@ -11,7 +11,17 @@ import CoreLocation
 // MARK: - UITableViewDelegate
 extension MainViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let recordItem = records[indexPath.row]
+        
         let dvc = DetailViewController()
+        dvc.recordItem = RecordItem(
+            date: recordItem.date,
+            time: recordItem.time,
+            address: recordItem.address,
+            latitude: recordItem.latitude,
+            longitude: recordItem.longitude
+        )
         present(dvc, animated: true, completion: nil)
     }
 }
@@ -42,15 +52,10 @@ extension MainViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
         var count = 0
-        
-        if records.isEmpty {
-            count = 0
-        } else {
+        if !records.isEmpty {
             count = records.count
         }
-        
         return count
     }
     

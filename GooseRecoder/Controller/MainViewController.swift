@@ -26,7 +26,7 @@ class MainViewController: UIViewController {
     
     var addressStr = ""
     var timeStr = ""
-    var dateStr = ""
+    var dateStr = getDate(date: Date())
     var latitude = 0.0
     var longitude = 0.0
     
@@ -71,7 +71,6 @@ class MainViewController: UIViewController {
     
     func configure() {
         tableView.register(MainTableViewCell.self, forCellReuseIdentifier: "MainTableViewCell")
-        dateStr = getDate(date: Date())
     }
     
     func configureLoadRecord() {
@@ -124,6 +123,8 @@ class MainViewController: UIViewController {
     }
     
     // MARK: - Actions
+    
+    // 휴지통 버튼 클릭
     @objc func clearButtonTapped() {
         do{
             try realm.write({
@@ -136,11 +137,9 @@ class MainViewController: UIViewController {
         tableView.reloadData()
     }
     
+    // 달력 버튼 클릳
     @objc func calendarButtonTapped() {
-        print("달력 탭")
-        //        configureLoadTest()
         selectedDate = ""
-        
         DispatchQueue.main.async {
             if self.todayDate == self.selectedDate {
                 UIView.transition(with: self.recordButton, duration: 0.4,
@@ -156,49 +155,41 @@ class MainViewController: UIViewController {
                 })
             }
         }
-        
         tableView.reloadData()
-        print(records)
     }
     
+    // 기록 버튼 클릭
     @objc func recordButtonTapped() {
         locationManager.requestWhenInUseAuthorization()
-        getAddress()
+        addRecord()
     }
     
     // MARK: - Helpers
     
-    private func getAddress() {
+    private func addRecord() {
         guard let currentLocation = locationManager.location else { return }
         let latitude = currentLocation.coordinate.latitude
         let longitude = currentLocation.coordinate.longitude
         AddressService.fetchAddress(lat: latitude, lon: longitude) { address in
-            self.addRecord(address)
+            
+            let recordItem = Record()
+            recordItem.address = address
+            recordItem.date = getDate(date: Date())
+            recordItem.time = getTime(date: Date())
+            recordItem.latitude = latitude
+            recordItem.longitude = longitude
+            
+            try! self.realm.write {
+                self.realm.add(recordItem)
+            }
+            
+            self.tableView.reloadData()
+            
+            let endIndex = IndexPath(row: self.records.count-1, section: 0)
+            self.tableView.scrollToRow(at: endIndex, at: .bottom, animated: true)
+
         }
-        self.latitude = latitude
-        self.longitude = longitude
     }
-    
-    private func addRecord(_ address: String) {
-        let address = address
-        let time = getTime(date: Date())
-        let date = getDate(date: Date())
-        
-        let recordItem = Record()
-        recordItem.address = address
-        recordItem.date = date
-        recordItem.time = time
-        
-        try! realm.write {
-            realm.add(recordItem)
-        }
-        
-        tableView.reloadData()
-        
-        let endIndex = IndexPath(row: records.count-1, section: 0)
-        tableView.scrollToRow(at: endIndex, at: .bottom, animated: true)
-    }
-    
 }
 
 
