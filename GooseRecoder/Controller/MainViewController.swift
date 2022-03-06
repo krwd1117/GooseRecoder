@@ -10,6 +10,7 @@ import CoreLocation
 import SnapKit
 
 import RealmSwift
+import SwiftUI
 
 class MainViewController: UIViewController {
     
@@ -29,6 +30,9 @@ class MainViewController: UIViewController {
     var latitude = 0.0
     var longitude = 0.0
     
+    var todayDate = getDate(date: Date())
+    var selectedDate = getDate(date: Date())
+    
     lazy var tableView : UITableView = {
         let tb = UITableView()
         tb.backgroundColor = .white
@@ -45,6 +49,7 @@ class MainViewController: UIViewController {
         button.addTarget(self, action: #selector(recordButtonTapped), for: .touchUpInside)
         button.setTitle("기록", for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 20, weight: .bold)
+        
         return button
     }()
     
@@ -75,7 +80,7 @@ class MainViewController: UIViewController {
     }
     
     func configureLoadTest() {
-        let predicate = NSPredicate(format: "date = '2022-03-06'", dateStr)
+        let predicate = NSPredicate(format: "date = '2022-03-05'", dateStr)
         records = realm.objects(Record.self).filter(predicate).sorted(byKeyPath: "time", ascending: true)
     }
     
@@ -95,10 +100,10 @@ class MainViewController: UIViewController {
         
         // 오른쪽 버튼
         navigationItem.rightBarButtonItem = UIBarButtonItem(
-            image: UIImage(systemName: "gobackward"),
+            image: UIImage(systemName: "trash.circle"),
             style: .plain,
             target: self,
-            action: #selector(reloadButtonTapped)
+            action: #selector(clearButtonTapped)
         )
         navigationItem.rightBarButtonItem?.tintColor = .white
     }
@@ -119,16 +124,39 @@ class MainViewController: UIViewController {
     }
     
     // MARK: - Actions
-    @objc func reloadButtonTapped() {
-        print("날짜 새로고침")
-        configureLoadRecord()
+    @objc func clearButtonTapped() {
+        do{
+            try realm.write({
+                let predicate = NSPredicate(format: "date = %@", getDate(date: Date()))
+                realm.delete(realm.objects(Record.self).filter(predicate))
+            })
+        } catch {
+            print(error.localizedDescription)
+        }
         tableView.reloadData()
-        print(records)
     }
     
     @objc func calendarButtonTapped() {
         print("달력 탭")
-        configureLoadTest()
+        //        configureLoadTest()
+        selectedDate = ""
+        
+        DispatchQueue.main.async {
+            if self.todayDate == self.selectedDate {
+                UIView.transition(with: self.recordButton, duration: 0.4,
+                                  options: .autoreverse,
+                                  animations: {
+                    self.recordButton.isHidden = false
+                })
+            } else {
+                UIView.transition(with: self.recordButton, duration: 0.4,
+                                  options: .transitionFlipFromBottom,
+                                  animations: {
+                    self.recordButton.isHidden = true
+                })
+            }
+        }
+        
         tableView.reloadData()
         print(records)
     }
@@ -139,20 +167,6 @@ class MainViewController: UIViewController {
     }
     
     // MARK: - Helpers
-    
-    private func getDate(date: Date) -> String {
-        let df = DateFormatter()
-        df.locale = Locale(identifier: "ko_KR")
-        df.dateFormat = "yyyy-MM-dd"
-        return df.string(from: date)
-    }
-    
-    private func getTime(date: Date) -> String {
-        let df = DateFormatter()
-        df.locale = Locale(identifier: "ko_KR")
-        df.dateFormat = "HH:mm:ss"
-        return df.string(from: date)
-    }
     
     private func getAddress() {
         guard let currentLocation = locationManager.location else { return }
@@ -178,12 +192,11 @@ class MainViewController: UIViewController {
         try! realm.write {
             realm.add(recordItem)
         }
-
+        
         tableView.reloadData()
         
-//        let endIndex = IndexPath(row: records.count-1, section: 0)
-        
-//        tableView.scrollToRow(at: endIndex, at: .bottom, animated: true)
+        let endIndex = IndexPath(row: records.count-1, section: 0)
+        tableView.scrollToRow(at: endIndex, at: .bottom, animated: true)
     }
     
 }
