@@ -45,7 +45,6 @@ extension MainViewController: UITableViewDataSource {
         }
         
         tableView.deleteRows(at: [indexPath], with: .left)
-        
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -63,6 +62,7 @@ extension MainViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "MainTableViewCell", for: indexPath) as? MainTableViewCell else { return UITableViewCell()}
+        cell.selectionStyle = .none
         cell.currentTime = records[indexPath.row].time
         cell.address = records[indexPath.row].address
         return cell

@@ -78,9 +78,11 @@ class DetailViewController: UIViewController {
     
     lazy var textField: UITextField = {
         let tf = UITextField()
-        tf.backgroundColor = .white
+        tf.backgroundColor = .systemBackground
+        tf.textColor = .label
         tf.text = recordItem?.memo
-        tf.placeholder = "메모를 입력하세요"
+//        tf.placeholder = "메모를 입력하세요"
+        tf.attributedPlaceholder = NSAttributedString(string: "메모를 입력하세요", attributes: [.foregroundColor: UIColor.systemGray])
         tf.layer.cornerRadius = 10
         tf.clearsOnBeginEditing = true
         tf.addLeftPadding()
@@ -110,6 +112,13 @@ class DetailViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = MAINCOLOR
         configureLayout()
+        
+        textField.delegate = self
+        
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
     }
     
     // MARK: - Configure
@@ -161,6 +170,7 @@ class DetailViewController: UIViewController {
         
         view.addSubview(buttonStack)
         buttonStack.snp.makeConstraints {
+            $0.top.equalTo(mapView.snp.bottom).offset(16)
             $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(16)
             $0.trailing.leading.equalToSuperview().inset(16)
         }

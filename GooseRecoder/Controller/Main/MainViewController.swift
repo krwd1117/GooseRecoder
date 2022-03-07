@@ -83,11 +83,6 @@ class MainViewController: UIViewController {
         records = realm.objects(Record.self).filter(predicate).sorted(byKeyPath: "time", ascending: true)
     }
     
-    func configureLoadTest() {
-        let predicate = NSPredicate(format: "date = '2022-03-05'", selectedDate)
-        records = realm.objects(Record.self).filter(predicate).sorted(byKeyPath: "time", ascending: true)
-    }
-    
     func configureNavigation() {
         // 왼쪽 버튼
         navigationItem.leftBarButtonItem = UIBarButtonItem(

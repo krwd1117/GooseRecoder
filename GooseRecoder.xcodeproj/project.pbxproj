@@ -17,6 +17,7 @@
 		28710B8727D471B0009A1D17 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28710B8627D471B0009A1D17 /* CalendarViewController.swift */; };
 		28710B8A27D47263009A1D17 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28710B8927D47263009A1D17 /* Constants.swift */; };
 		28710B8C27D47453009A1D17 /* CalendarViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28710B8B27D47453009A1D17 /* CalendarViewController+Extension.swift */; };
+		28710B9027D4BE46009A1D17 /* DetailViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28710B8F27D4BE46009A1D17 /* DetailViewController+Extension.swift */; };
 		28720B6927D041A6001A1EAB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28720B6827D041A6001A1EAB /* AppDelegate.swift */; };
 		28720B6B27D041A6001A1EAB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28720B6A27D041A6001A1EAB /* SceneDelegate.swift */; };
 		28720B6D27D041A6001A1EAB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28720B6C27D041A6001A1EAB /* ViewController.swift */; };
@@ -41,6 +42,7 @@
 		28710B8627D471B0009A1D17 /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		28710B8927D47263009A1D17 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		28710B8B27D47453009A1D17 /* CalendarViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CalendarViewController+Extension.swift"; sourceTree = "<group>"; };
+		28710B8F27D4BE46009A1D17 /* DetailViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DetailViewController+Extension.swift"; sourceTree = "<group>"; };
 		28720B6527D041A6001A1EAB /* GooseRecoder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GooseRecoder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		28720B6827D041A6001A1EAB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		28720B6A27D041A6001A1EAB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -95,6 +97,7 @@
 			isa = PBXGroup;
 			children = (
 				2823514E27D3AB94002D4803 /* DetailViewController.swift */,
+				28710B8F27D4BE46009A1D17 /* DetailViewController+Extension.swift */,
 			);
 			path = Detail;
 			sourceTree = "<group>";
@@ -292,6 +295,7 @@
 				288EC02027D06FB2000171DE /* MainViewController+Extension.swift in Sources */,
 				288EC02927D08634000171DE /* MainTableViewCell.swift in Sources */,
 				288EC02727D0828A000171DE /* AddressService.swift in Sources */,
+				28710B9027D4BE46009A1D17 /* DetailViewController+Extension.swift in Sources */,
 				28720B6927D041A6001A1EAB /* AppDelegate.swift in Sources */,
 				288EC01E27D06C83000171DE /* MainViewController.swift in Sources */,
 				28720B6B27D041A6001A1EAB /* SceneDelegate.swift in Sources */,
@@ -442,6 +446,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 5TQSUXNFZV;
@@ -459,9 +464,10 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.krwd.GooseRecoder;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -470,6 +476,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 5TQSUXNFZV;
@@ -487,9 +494,10 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.krwd.GooseRecoder;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

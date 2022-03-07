@@ -34,15 +34,18 @@ class MainTableViewCell: UITableViewCell {
     lazy var timeLabel: UILabel = {
         let label = UILabel()
         label.text = "시간"
-        label.textColor = .label
+//        label.textColor = .label
+        label.textColor = .black
+        label.textAlignment = .center
         return label
     }()
     
     lazy var addressLabel: UILabel = {
         let label = UILabel()
         label.text = "위치"
-        label.textColor = .label
-        label.textAlignment = .center
+//        label.textColor = .label
+        label.textColor = .black
+        label.textAlignment = .left
         return label
     }()
     
@@ -60,7 +63,8 @@ class MainTableViewCell: UITableViewCell {
     // MARK: - Configure
     
     func configure() {
-        backgroundColor = .systemBackground
+//        backgroundColor = .systemBackground
+        backgroundColor = .white
         
         guard let currentTime = currentTime else { return }
         timeLabel.text = currentTime
@@ -75,12 +79,14 @@ class MainTableViewCell: UITableViewCell {
         timeLabel.snp.makeConstraints {
             $0.centerY.equalToSuperview()
             $0.leading.equalToSuperview().offset(10)
+            $0.width.equalTo((frame.width - 20)*0.3)
             
         addSubview(addressLabel)
             addressLabel.snp.makeConstraints {
                 $0.centerY.equalToSuperview()
                 $0.leading.equalTo(timeLabel.snp.trailing).offset(10)
                 $0.trailing.equalToSuperview().inset(10)
+                $0.width.equalTo((frame.width - 20)*0.7)
             }
         }
     }
