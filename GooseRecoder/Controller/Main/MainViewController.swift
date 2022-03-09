@@ -45,8 +45,22 @@ class MainViewController: UIViewController {
         button.addTarget(self, action: #selector(recordButtonTapped), for: .touchUpInside)
         button.setTitle("기록", for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 20, weight: .bold)
-        
         return button
+    }()
+    
+    lazy var emptyView: UIView = {
+        let view = UIView()
+        view.layer.cornerRadius = 20
+        view.backgroundColor = .white
+        return view
+    }()
+    
+    lazy var emptyText: UILabel = {
+       let label = UILabel()
+        label.text = "기록이 없어요"
+        label.font = .systemFont(ofSize: 25, weight: .bold)
+        label.textColor = .systemGray
+        return label
     }()
     
     // MARK: - LifeCycle
@@ -110,7 +124,9 @@ class MainViewController: UIViewController {
     }
     
     func configureLayout() {
-        let stack = UIStackView(arrangedSubviews: [tableView, recordButton])
+        
+        
+        let stack = UIStackView(arrangedSubviews: [tableView, emptyView, recordButton])
         stack.axis = .vertical
         stack.spacing = 16
         
@@ -122,6 +138,14 @@ class MainViewController: UIViewController {
         recordButton.snp.makeConstraints {
             $0.height.equalTo(100)
         }
+        
+        emptyView.addSubview(emptyText)
+        emptyText.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.centerY.equalToSuperview()
+        }
+        
+        
     }
     
     // MARK: - Actions
@@ -175,7 +199,7 @@ class MainViewController: UIViewController {
             
             let endIndex = IndexPath(row: self.records.count-1, section: 0)
             self.tableView.scrollToRow(at: endIndex, at: .bottom, animated: true)
-
+            
         }
     }
 }
