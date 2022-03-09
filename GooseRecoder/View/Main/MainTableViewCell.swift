@@ -34,7 +34,6 @@ class MainTableViewCell: UITableViewCell {
     lazy var timeLabel: UILabel = {
         let label = UILabel()
         label.text = "시간"
-//        label.textColor = .label
         label.textColor = .black
         label.textAlignment = .center
         return label
@@ -43,7 +42,6 @@ class MainTableViewCell: UITableViewCell {
     lazy var addressLabel: UILabel = {
         let label = UILabel()
         label.text = "위치"
-//        label.textColor = .label
         label.textColor = .black
         label.textAlignment = .left
         return label
@@ -63,7 +61,6 @@ class MainTableViewCell: UITableViewCell {
     // MARK: - Configure
     
     func configure() {
-//        backgroundColor = .systemBackground
         backgroundColor = .white
         
         guard let currentTime = currentTime else { return }

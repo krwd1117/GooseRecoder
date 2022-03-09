@@ -14,6 +14,8 @@ import SwiftUI
 
 import FSCalendar
 
+import ProgressHUD
+
 class MainViewController: UIViewController {
     
     // MARK: - Properties
@@ -57,8 +59,9 @@ class MainViewController: UIViewController {
         locationManager = CLLocationManager()
         locationManager.delegate = self
         
-        configure()
+        tableView.register(MainTableViewCell.self, forCellReuseIdentifier: "MainTableViewCell")
         
+        configure()
         configureNavigation()
         configureLayout()
     }
@@ -75,7 +78,7 @@ class MainViewController: UIViewController {
     // MARK: - Configure
     
     func configure() {
-        tableView.register(MainTableViewCell.self, forCellReuseIdentifier: "MainTableViewCell")
+        
     }
     
     func configureLoadRecord() {
@@ -136,6 +139,7 @@ class MainViewController: UIViewController {
         } catch {
             print(error.localizedDescription)
         }
+        
         tableView.reloadData()
     }
     
@@ -155,28 +159,33 @@ class MainViewController: UIViewController {
     // MARK: - Helpers
     
     private func addRecord() {
-        guard let currentLocation = locationManager.location else { return }
-        let latitude = currentLocation.coordinate.latitude
-        let longitude = currentLocation.coordinate.longitude
-        AddressService.fetchAddress(lat: latitude, lon: longitude) { address in
-            
-            let recordItem = Record()
-            recordItem.address = address
-            recordItem.date = getDate(date: Date())
-            recordItem.time = getTime(date: Date())
-            recordItem.latitude = latitude
-            recordItem.longitude = longitude
-            
-            try! self.realm.write {
-                self.realm.add(recordItem)
+        do {
+            guard let currentLocation = locationManager.location else { return }
+            let latitude = currentLocation.coordinate.latitude
+            let longitude = currentLocation.coordinate.longitude
+            AddressService.fetchAddress(lat: latitude, lon: longitude) { address in
+                let recordItem = Record()
+                recordItem.address = address
+                recordItem.date = getDate(date: Date())
+                recordItem.time = getTime(date: Date())
+                recordItem.latitude = latitude
+                recordItem.longitude = longitude
+                
+                try! self.realm.write {
+                    self.realm.add(recordItem)
+                }
+                
+                self.tableView.reloadData()
+                
+                ProgressHUD.showSucceed()
+                
+                let endIndex = IndexPath(row: self.records.count-1, section: 0)
+                self.tableView.scrollToRow(at: endIndex, at: .bottom, animated: true)
             }
-            
-            self.tableView.reloadData()
-            
-            let endIndex = IndexPath(row: self.records.count-1, section: 0)
-            self.tableView.scrollToRow(at: endIndex, at: .bottom, animated: true)
-
+        } catch {
+            ProgressHUD.showFailed()
         }
+
     }
 }
 

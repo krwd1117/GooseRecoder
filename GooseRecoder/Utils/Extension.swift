@@ -42,7 +42,6 @@ extension Date {
     var firstDayOfTheMonth: Date {
         Calendar.current.date(from: Calendar.current.dateComponents([.year, .month], from: self))!
     }
-    
 }
 
 // MARK: - UIColor

@@ -92,15 +92,14 @@ extension MainViewController: CLLocationManagerDelegate {
     }
 }
 
+// MARK: - CalendarDelegate
 extension MainViewController: CalendarDelegate {
     func moveDate(date: String) {
         selectedDate = date
 
         let title = selectedDate.components(separatedBy: "-")
         navigationItem.title = "\(title[0])년 \(title[1])월 \(title[2])일"
-        
         configureLoadRecord()
-        
         if todayDate == selectedDate {
             recordButton.isHidden = false
         } else {
@@ -108,6 +107,6 @@ extension MainViewController: CalendarDelegate {
         }
         
         tableView.reloadData()
-    
     }
 }
+

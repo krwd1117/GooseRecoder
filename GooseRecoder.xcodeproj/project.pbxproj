@@ -30,6 +30,7 @@
 		2872B8F227D8B0FA006CC081 /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2872B8F127D8B0FA006CC081 /* Global.swift */; };
 		2872B8F427D8B383006CC081 /* SettingTableViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2872B8F327D8B383006CC081 /* SettingTableViewController+Extension.swift */; };
 		2872B8F927D8B4B4006CC081 /* SettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2872B8F827D8B4B4006CC081 /* SettingTableViewCell.swift */; };
+		2872B8FC27D8D796006CC081 /* ProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = 2872B8FB27D8D796006CC081 /* ProgressHUD */; };
 		288EC01E27D06C83000171DE /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288EC01D27D06C83000171DE /* MainViewController.swift */; };
 		288EC02027D06FB2000171DE /* MainViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288EC01F27D06FB2000171DE /* MainViewController+Extension.swift */; };
 		288EC02327D06FD8000171DE /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 288EC02227D06FD8000171DE /* SnapKit */; };
@@ -73,6 +74,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2872B8FC27D8D796006CC081 /* ProgressHUD in Frameworks */,
 				2823515427D3B3F4002D4803 /* RealmSwift in Frameworks */,
 				28710B7D27D46B89009A1D17 /* FSCalendar in Frameworks */,
 				2823515227D3B3F4002D4803 /* Realm in Frameworks */,
@@ -249,6 +251,7 @@
 				2823515127D3B3F4002D4803 /* Realm */,
 				2823515327D3B3F4002D4803 /* RealmSwift */,
 				28710B7C27D46B89009A1D17 /* FSCalendar */,
+				2872B8FB27D8D796006CC081 /* ProgressHUD */,
 			);
 			productName = GooseRecoder;
 			productReference = 28720B6527D041A6001A1EAB /* GooseRecoder.app */;
@@ -282,6 +285,7 @@
 				288EC02127D06FD8000171DE /* XCRemoteSwiftPackageReference "SnapKit" */,
 				2823515027D3B3F4002D4803 /* XCRemoteSwiftPackageReference "realm-swift" */,
 				28710B7B27D46B89009A1D17 /* XCRemoteSwiftPackageReference "FSCalendar" */,
+				2872B8FA27D8D796006CC081 /* XCRemoteSwiftPackageReference "ProgressHUD" */,
 			);
 			productRefGroup = 28720B6627D041A6001A1EAB /* Products */;
 			projectDirPath = "";
@@ -573,6 +577,14 @@
 				minimumVersion = 2.0.0;
 			};
 		};
+		2872B8FA27D8D796006CC081 /* XCRemoteSwiftPackageReference "ProgressHUD" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/relatedcode/ProgressHUD.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		288EC02127D06FD8000171DE /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
@@ -598,6 +610,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 28710B7B27D46B89009A1D17 /* XCRemoteSwiftPackageReference "FSCalendar" */;
 			productName = FSCalendar;
+		};
+		2872B8FB27D8D796006CC081 /* ProgressHUD */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2872B8FA27D8D796006CC081 /* XCRemoteSwiftPackageReference "ProgressHUD" */;
+			productName = ProgressHUD;
 		};
 		288EC02227D06FD8000171DE /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
