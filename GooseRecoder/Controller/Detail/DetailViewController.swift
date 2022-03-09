@@ -81,7 +81,6 @@ class DetailViewController: UIViewController {
         tf.backgroundColor = .systemBackground
         tf.textColor = .label
         tf.text = recordItem?.memo
-//        tf.placeholder = "메모를 입력하세요"
         tf.attributedPlaceholder = NSAttributedString(string: "메모를 입력하세요", attributes: [.foregroundColor: UIColor.systemGray])
         tf.layer.cornerRadius = 10
         tf.clearsOnBeginEditing = true

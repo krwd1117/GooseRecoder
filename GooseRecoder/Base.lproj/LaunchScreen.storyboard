@@ -15,16 +15,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="kiroki" translatesAutoresizingMaskIntoConstraints="NO" id="EgA-Hz-xyO">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Goose" translatesAutoresizingMaskIntoConstraints="NO" id="EgA-Hz-xyO">
                                 <rect key="frame" x="0.0" y="241.5" width="414" height="413"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" red="0.1085462943" green="0.1433568895" blue="0.17915540930000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="EgA-Hz-xyO" secondAttribute="height" multiplier="1:1" constant="1" id="s4n-oL-E3G"/>
                                 </constraints>
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="0.1085462943" green="0.1433568895" blue="0.17915540930000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="EgA-Hz-xyO" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="LHy-kv-jaE"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="EgA-Hz-xyO" secondAttribute="trailing" id="LLd-xY-UDM"/>
@@ -58,6 +58,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="kiroki" width="1024" height="1024"/>
+        <image name="Goose" width="1024" height="1024"/>
     </resources>
 </document>

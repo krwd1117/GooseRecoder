@@ -8,6 +8,7 @@
 import UIKit
 
 struct RecordItem {
+    
     let uuidString: String
     let date: String
     let time: String
