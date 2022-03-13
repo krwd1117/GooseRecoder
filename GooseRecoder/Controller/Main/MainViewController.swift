@@ -6,12 +6,9 @@
 //
 
 import UIKit
-import CoreLocation
 import SnapKit
 
-import RealmSwift
 import SwiftUI
-
 import FSCalendar
 
 import ProgressHUD
@@ -19,14 +16,10 @@ import ProgressHUD
 class MainViewController: UIViewController {
     
     // MARK: - Properties
-    var locationManager: CLLocationManager!
     
-    var currentLocation: CLLocation?
-    var address: [CLPlacemark]?
+//        var records: Results<Record>!
     
-    var records: Results<Record>!
-    
-    let realm = try! Realm()
+    //    let realm = try! Realm()
     
     var todayDate = getDate(date: Date())
     var selectedDate = getDate(date: Date())
@@ -56,9 +49,6 @@ class MainViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = MAINCOLOR
         
-        locationManager = CLLocationManager()
-        locationManager.delegate = self
-        
         tableView.register(MainTableViewCell.self, forCellReuseIdentifier: "MainTableViewCell")
         
         configure()
@@ -82,8 +72,7 @@ class MainViewController: UIViewController {
     }
     
     func configureLoadRecord() {
-        let predicate = NSPredicate(format: "date = %@", selectedDate)
-        records = realm.objects(Record.self).filter(predicate).sorted(byKeyPath: "time", ascending: true)
+        RealmManager.shared.loadRecords(selectedDate)
     }
     
     func configureNavigation() {
@@ -127,65 +116,65 @@ class MainViewController: UIViewController {
         }
     }
     
+    func alertFuntion(errorTitle: String, errorMessage: String) {
+        let alertController = UIAlertController(
+            title: errorTitle,
+            message: errorTitle,
+            preferredStyle: .alert
+        )
+        let done = UIAlertAction(title: "확인", style: .default, handler: nil)
+        alertController.addAction(done)
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
     // MARK: - Actions
     
-    // 휴지통 버튼 클릭
+    // 휴지통
     @objc func clearButtonTapped() {
-        do{
-            try realm.write({
-                let predicate = NSPredicate(format: "date = %@", selectedDate)
-                realm.delete(realm.objects(Record.self).filter(predicate))
-            })
-        } catch {
-            print(error.localizedDescription)
-        }
-        
+        RealmManager.shared.clearAllRecords(selectedDate)
         tableView.reloadData()
     }
     
-    // 달력 버튼 클릭
+    // 달력
     @objc func calendarButtonTapped() {
         let cvc = CalendarViewController()
         cvc.delegate = self
         present(cvc, animated: true, completion: nil)
     }
     
-    // 기록 버튼 클릭
+    // 기록
     @objc func recordButtonTapped() {
-        locationManager.requestWhenInUseAuthorization()
-        addRecord()
-    }
-    
-    // MARK: - Helpers
-    
-    private func addRecord() {
-        do {
-            guard let currentLocation = locationManager.location else { return }
-            let latitude = currentLocation.coordinate.latitude
-            let longitude = currentLocation.coordinate.longitude
-            AddressService.fetchAddress(lat: latitude, lon: longitude) { address in
-                let recordItem = Record()
-                recordItem.address = address
-                recordItem.date = getDate(date: Date())
-                recordItem.time = getTime(date: Date())
-                recordItem.latitude = latitude
-                recordItem.longitude = longitude
-                
-                try! self.realm.write {
-                    self.realm.add(recordItem)
-                }
-                
-                self.tableView.reloadData()
-                
+        LocationManager.shared.getAddress { [weak self] address, latitude, longitude, error in
+            guard let self = self else { return }
+            
+            if error == nil {
+                RealmManager.shared.appendRecord(latitude: latitude, longitude: longitude, address: address)
                 ProgressHUD.showSucceed()
                 
-                let endIndex = IndexPath(row: self.records.count-1, section: 0)
+                self.tableView.reloadData()
+                let endIndex = IndexPath(row: RealmManager.shared.countRecords()-1, section: 0)
                 self.tableView.scrollToRow(at: endIndex, at: .bottom, animated: true)
+            } else if error != nil {
+                guard let error = error else { return }
+                if error as! LocationError == LocationError.NetworkError {
+                    self.alertFuntion(
+                        errorTitle: "위치 정보를 가져올 수 없습니다.",
+                        errorMessage: "네트워크 연결을 확인해주세요."
+                    )
+                } else if error as! LocationError == LocationError.PermissionError {
+                    self.alertFuntion(
+                        errorTitle: "위치 권한을 확인할 수 없습니다.",
+                        errorMessage: "위치 권한을 '허용'해야 기록을 남길 수 있어요."
+                    )
+                }
+                else {
+                    self.alertFuntion(
+                        errorTitle: "Error Message",
+                        errorMessage: "\(error.localizedDescription)"
+                    )
+                }
             }
-        } catch {
-            ProgressHUD.showFailed()
         }
-
     }
 }
 

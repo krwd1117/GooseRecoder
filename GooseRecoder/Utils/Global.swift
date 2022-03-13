@@ -7,4 +7,4 @@
 
 import UIKit
 
-public let VERSION = "1.1"
+public let VERSION = "1.2.1"

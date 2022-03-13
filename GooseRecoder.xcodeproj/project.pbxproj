@@ -35,8 +35,9 @@
 		288EC02027D06FB2000171DE /* MainViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288EC01F27D06FB2000171DE /* MainViewController+Extension.swift */; };
 		288EC02327D06FD8000171DE /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 288EC02227D06FD8000171DE /* SnapKit */; };
 		288EC02527D07855000171DE /* Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288EC02427D07855000171DE /* Record.swift */; };
-		288EC02727D0828A000171DE /* AddressService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288EC02627D0828A000171DE /* AddressService.swift */; };
 		288EC02927D08634000171DE /* MainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288EC02827D08634000171DE /* MainTableViewCell.swift */; };
+		28FE9A2027DE104000664DBB /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FE9A1F27DE104000664DBB /* LocationManager.swift */; };
+		28FE9A2227DE1F9100664DBB /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FE9A2127DE1F9100664DBB /* RealmManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -65,8 +66,9 @@
 		288EC01D27D06C83000171DE /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		288EC01F27D06FB2000171DE /* MainViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainViewController+Extension.swift"; sourceTree = "<group>"; };
 		288EC02427D07855000171DE /* Record.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Record.swift; sourceTree = "<group>"; };
-		288EC02627D0828A000171DE /* AddressService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressService.swift; sourceTree = "<group>"; };
 		288EC02827D08634000171DE /* MainTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewCell.swift; sourceTree = "<group>"; };
+		28FE9A1F27DE104000664DBB /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		28FE9A2127DE1F9100664DBB /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,7 +134,7 @@
 			isa = PBXGroup;
 			children = (
 				28720B8127D041C4001A1EAB /* Model */,
-				28720B7C27D041AE001A1EAB /* ViewModel */,
+				28FE9A1D27DDF68100664DBB /* ViewModel */,
 				28720B8627D041F5001A1EAB /* View */,
 				28720B8527D041F3001A1EAB /* Controller */,
 				28720B8427D041F1001A1EAB /* API */,
@@ -146,13 +148,6 @@
 				28720B7627D041A7001A1EAB /* Info.plist */,
 			);
 			path = GooseRecoder;
-			sourceTree = "<group>";
-		};
-		28720B7C27D041AE001A1EAB /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		28720B8127D041C4001A1EAB /* Model */ = {
@@ -179,7 +174,8 @@
 		28720B8427D041F1001A1EAB /* API */ = {
 			isa = PBXGroup;
 			children = (
-				288EC02627D0828A000171DE /* AddressService.swift */,
+				28FE9A1F27DE104000664DBB /* LocationManager.swift */,
+				28FE9A2127DE1F9100664DBB /* RealmManager.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -190,7 +186,7 @@
 				28710B8D27D47DBF009A1D17 /* Calendar */,
 				28710B8E27D47DC8009A1D17 /* Detail */,
 				28710B8827D47205009A1D17 /* Main */,
-				2872B8ED27D89953006CC081 /* TabbarController.swift */,
+				28FE9A1E27DDF69B00664DBB /* Tab */,
 				2872B8F527D8B388006CC081 /* Setting */,
 			);
 			path = Controller;
@@ -228,6 +224,21 @@
 				2872B8F827D8B4B4006CC081 /* SettingTableViewCell.swift */,
 			);
 			path = Setting;
+			sourceTree = "<group>";
+		};
+		28FE9A1D27DDF68100664DBB /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		28FE9A1E27DDF69B00664DBB /* Tab */ = {
+			isa = PBXGroup;
+			children = (
+				2872B8ED27D89953006CC081 /* TabbarController.swift */,
+			);
+			path = Tab;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -320,6 +331,7 @@
 				2823514F27D3AB94002D4803 /* DetailViewController.swift in Sources */,
 				28710B7827D45E6F009A1D17 /* RecordItem.swift in Sources */,
 				288EC02527D07855000171DE /* Record.swift in Sources */,
+				28FE9A2027DE104000664DBB /* LocationManager.swift in Sources */,
 				28710B7627D45374009A1D17 /* GlobalFunctions.swift in Sources */,
 				28710B7A27D46157009A1D17 /* MapMarker.swift in Sources */,
 				2872B8EE27D89953006CC081 /* TabbarController.swift in Sources */,
@@ -328,8 +340,8 @@
 				28710B8A27D47263009A1D17 /* Constants.swift in Sources */,
 				288EC02027D06FB2000171DE /* MainViewController+Extension.swift in Sources */,
 				288EC02927D08634000171DE /* MainTableViewCell.swift in Sources */,
-				288EC02727D0828A000171DE /* AddressService.swift in Sources */,
 				2872B8F427D8B383006CC081 /* SettingTableViewController+Extension.swift in Sources */,
+				28FE9A2227DE1F9100664DBB /* RealmManager.swift in Sources */,
 				28710B9027D4BE46009A1D17 /* DetailViewController+Extension.swift in Sources */,
 				28720B6927D041A6001A1EAB /* AppDelegate.swift in Sources */,
 				288EC01E27D06C83000171DE /* MainViewController.swift in Sources */,

@@ -76,14 +76,13 @@ class MainTableViewCell: UITableViewCell {
         timeLabel.snp.makeConstraints {
             $0.centerY.equalToSuperview()
             $0.leading.equalToSuperview().offset(10)
-            $0.width.equalTo((frame.width - 20)*0.3)
+            $0.width.equalTo(100)
             
         addSubview(addressLabel)
             addressLabel.snp.makeConstraints {
                 $0.centerY.equalToSuperview()
                 $0.leading.equalTo(timeLabel.snp.trailing).offset(10)
                 $0.trailing.equalToSuperview().inset(10)
-                $0.width.equalTo((frame.width - 20)*0.7)
             }
         }
     }
