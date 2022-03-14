@@ -10,8 +10,8 @@ import UIKit
 extension DetailViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-//        textField.resignFirstResponder()
-        confirmButtonTapped()
+//        confirmButtonTapped()
+        textField.resignFirstResponder()
         return true
     }
     

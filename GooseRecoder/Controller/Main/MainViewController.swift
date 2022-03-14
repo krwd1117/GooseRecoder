@@ -17,14 +17,10 @@ class MainViewController: UIViewController {
     
     // MARK: - Properties
     
-//        var records: Results<Record>!
-    
-    //    let realm = try! Realm()
-    
     var todayDate = getDate(date: Date())
     var selectedDate = getDate(date: Date())
     
-    lazy var tableView : UITableView = {
+    lazy var tableView: UITableView = {
         let tb = UITableView()
         tb.backgroundColor = .white
         tb.layer.cornerRadius = 20
@@ -40,8 +36,32 @@ class MainViewController: UIViewController {
         button.addTarget(self, action: #selector(recordButtonTapped), for: .touchUpInside)
         button.setTitle("기록", for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 20, weight: .bold)
-        
         return button
+    }()
+    
+    lazy var emptyView: UIView = {
+        let view = UIView()
+        view.layer.cornerRadius = 20
+        view.backgroundColor = .white
+        view.isHidden = true
+        return view
+    }()
+    
+    lazy var emptyLabel: UILabel = {
+        let label = UILabel()
+        label.text = "기록이 없어요"
+        label.textColor = .lightGray
+        label.font = UIFont.systemFont(ofSize: 32, weight: .bold)
+        return label
+    }()
+    
+    lazy var emptyNotiLabel: UILabel = {
+        let label = UILabel()
+        label.text = "오늘이 아니면 기록을 남길 수 없어요"
+        label.textColor = .lightGray
+        label.font = UIFont.systemFont(ofSize: 16, weight: .medium)
+        label.isHidden = true
+        return label
     }()
     
     // MARK: - LifeCycle
@@ -51,28 +71,35 @@ class MainViewController: UIViewController {
         
         tableView.register(MainTableViewCell.self, forCellReuseIdentifier: "MainTableViewCell")
         
-        configure()
         configureNavigation()
         configureLayout()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         configureLoadRecord()
+        configureEmptyView()
+        tableView.reloadData()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let vc = segue.destination as? CalendarViewController else { return }
-        vc.delegate = self
+        guard let cvc = segue.destination as? CalendarViewController else { return }
+        cvc.delegate = self
     }
     
     // MARK: - Configure
     
-    func configure() {
-        
+    func configureEmptyView() {
+        if RealmManager.shared.countRecords() > 0 {
+            self.emptyView.isHidden = true
+        } else {
+            self.emptyView.isHidden = false
+        }
     }
     
     func configureLoadRecord() {
         RealmManager.shared.loadRecords(selectedDate)
+        
+        print(RealmManager.shared.countRecords())
     }
     
     func configureNavigation() {
@@ -96,13 +123,13 @@ class MainViewController: UIViewController {
             image: UIImage(systemName: "trash.circle"),
             style: .plain,
             target: self,
-            action: #selector(clearButtonTapped)
+            action: #selector(trashButtonTapped)
         )
         navigationItem.rightBarButtonItem?.tintColor = .white
     }
     
     func configureLayout() {
-        let stack = UIStackView(arrangedSubviews: [tableView, recordButton])
+        let stack = UIStackView(arrangedSubviews: [tableView, emptyView, recordButton])
         stack.axis = .vertical
         stack.spacing = 16
         
@@ -111,10 +138,28 @@ class MainViewController: UIViewController {
             $0.edges.equalTo(view.safeAreaLayoutGuide).inset(16)
         }
         
+        emptyView.snp.makeConstraints {
+            $0.edges.equalTo(tableView)
+        }
+        
+        emptyView.addSubview(emptyLabel)
+        emptyLabel.snp.makeConstraints {
+            $0.centerX.centerY.equalTo(emptyView)
+        }
+        
+        emptyView.addSubview(emptyNotiLabel)
+        emptyNotiLabel.snp.makeConstraints {
+            $0.centerX.equalTo(emptyView)
+            $0.top.equalTo(emptyLabel.snp.bottom).offset(16)
+        }
+        
         recordButton.snp.makeConstraints {
             $0.height.equalTo(100)
         }
+        
     }
+    
+    // MARK: - Actions
     
     func alertFuntion(errorTitle: String, errorMessage: String) {
         let alertController = UIAlertController(
@@ -127,11 +172,29 @@ class MainViewController: UIViewController {
         self.present(alertController, animated: true, completion: nil)
     }
     
-    // MARK: - Actions
+    @objc func trashButtonTapped() {
+        let alertController = UIAlertController(
+            title: "삭제",
+            message: "기록을 모두 지우시겠습니까?",
+            preferredStyle: .alert
+        )
+        
+        let cancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+        let clear = UIAlertAction(title: "확인", style: .default) { [weak self] Action in
+            self?.clearButtonTapped()
+        }
+        
+        alertController.addAction(cancel)
+        alertController.addAction(clear)
+        
+        present(alertController, animated: true, completion: nil)
+        
+    }
     
     // 휴지통
     @objc func clearButtonTapped() {
         RealmManager.shared.clearAllRecords(selectedDate)
+        configureEmptyView()
         tableView.reloadData()
     }
     
@@ -142,7 +205,7 @@ class MainViewController: UIViewController {
         present(cvc, animated: true, completion: nil)
     }
     
-    // 기록
+    // 기록 추가
     @objc func recordButtonTapped() {
         LocationManager.shared.getAddress { [weak self] address, latitude, longitude, error in
             guard let self = self else { return }
@@ -150,6 +213,8 @@ class MainViewController: UIViewController {
             if error == nil {
                 RealmManager.shared.appendRecord(latitude: latitude, longitude: longitude, address: address)
                 ProgressHUD.showSucceed()
+                
+                self.configureEmptyView()
                 
                 self.tableView.reloadData()
                 let endIndex = IndexPath(row: RealmManager.shared.countRecords()-1, section: 0)

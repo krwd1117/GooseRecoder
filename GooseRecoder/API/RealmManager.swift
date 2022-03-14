@@ -14,7 +14,11 @@ class RealmManager: NSObject {
     
     var records: Results<Record>!
     let realm = try! Realm()
-    
+ 
+}
+
+// MARK: - Record
+extension RealmManager {
     // 기록 개수 세기
     func countRecords() -> Int {
         return records.count
@@ -50,8 +54,8 @@ class RealmManager: NSObject {
         }
     }
     
+    // 기록 추가
     func appendRecord(latitude: Double, longitude: Double, address: String) {
-        
         let recordItem = Record()
         recordItem.address = address
         recordItem.date = getDate(date: Date())
@@ -62,7 +66,19 @@ class RealmManager: NSObject {
         try! self.realm.write {
             self.realm.add(recordItem)
         }
-        
+    }
+    
+    func updateMemo(recordItem: RecordItem, text: String) {
+        let predicate = NSPredicate(format: "uuidString = %@", recordItem.uuidString)
+        let record = realm.objects(Record.self).filter(predicate)
+            do {
+                try realm.write {
+                    record[0].memo = text
+                }
+            } catch {
+                print("ERROR: \(error.localizedDescription)")
+            }
     }
     
 }
+

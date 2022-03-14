@@ -9,15 +9,11 @@ import UIKit
 import SnapKit
 import MapKit
 
-import RealmSwift
-
 class DetailViewController: UIViewController {
     
     // MARK: - Properties
     
     var recordItem: RecordItem? = nil
-    
-    let realm = try! Realm()
     
     lazy var mapView: MKMapView = {
         let mapView = MKMapView()
@@ -110,6 +106,8 @@ class DetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = MAINCOLOR
+        
+        configureNavigationBar()
         configureLayout()
         
         textField.delegate = self
@@ -122,11 +120,25 @@ class DetailViewController: UIViewController {
     
     // MARK: - Configure
     
+    private func configureNavigationBar() {
+        let backButton = UIBarButtonItem(
+            image: UIImage(systemName: "chevron.left"),
+            style: .plain,
+            target: self,
+            action: #selector(cancelButtonTapped)
+        )
+        backButton.tintColor = .white
+        navigationItem.leftBarButtonItem = backButton
+        
+        navigationItem.title = "상세정보"
+        
+    }
+    
     private func configureLayout() {
         view.addSubview(addressLabel)
         addressLabel.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.top.equalToSuperview().inset(16)
+            $0.top.equalTo(view.safeAreaLayoutGuide).inset(8)
             $0.height.equalTo(50)
             $0.trailing.leading.equalToSuperview().inset(16)
         }
@@ -189,21 +201,13 @@ class DetailViewController: UIViewController {
     // MARK: - Actions
     
     @objc func cancelButtonTapped() {
-        dismiss(animated: true, completion: nil)
+        navigationController?.popViewController(animated: true)
     }
     
     @objc func confirmButtonTapped() {
         guard let recordItem = recordItem else { return }
-        let predicate = NSPredicate(format: "uuidString = %@", recordItem.uuidString)
-        let record = realm.objects(Record.self).filter(predicate)
-            do {
-                try realm.write {
-                    record[0].memo = textField.text ?? ""
-                }
-            } catch {
-                print("ERROR: \(error.localizedDescription)")
-            }
-        dismiss(animated: true)
+        RealmManager.shared.updateMemo(recordItem: recordItem, text: textField.text ?? "")        
+        navigationController?.popViewController(animated: true)
     }
     
     // MARK: - Helpers

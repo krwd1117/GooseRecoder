@@ -13,24 +13,12 @@ class MainTableViewCell: UITableViewCell {
     
     // MARK: - Properties
     
-    var time: Date? {
+    var recordItem: RecordItem?{
         didSet {
             configure()
         }
     }
-    
-    var currentTime: String? {
-        didSet {
-            configure()
-        }
-    }
-    
-    var address: String? {
-        didSet{
-            configure()
-        }
-    }
-    
+
     lazy var timeLabel: UILabel = {
         let label = UILabel()
         label.text = "시간"
@@ -44,6 +32,7 @@ class MainTableViewCell: UITableViewCell {
         label.text = "위치"
         label.textColor = .black
         label.textAlignment = .left
+        label.numberOfLines = 0
         return label
     }()
     
@@ -62,13 +51,9 @@ class MainTableViewCell: UITableViewCell {
     
     func configure() {
         backgroundColor = .white
-        
-        guard let currentTime = currentTime else { return }
-        timeLabel.text = currentTime
-
-        guard let address = address else { return }
-        addressLabel.text = address
-        
+        timeLabel.text = recordItem?.time
+        addressLabel.text = recordItem?.memo != "" ? recordItem?.memo : recordItem?.address
+//        memoLabel.text = recordItem?.memo
     }
     
     func configureLayout() {
@@ -76,14 +61,14 @@ class MainTableViewCell: UITableViewCell {
         timeLabel.snp.makeConstraints {
             $0.centerY.equalToSuperview()
             $0.leading.equalToSuperview().offset(10)
-            $0.width.equalTo(100)
-            
+            $0.width.equalTo(75)
+        }
+        
         addSubview(addressLabel)
-            addressLabel.snp.makeConstraints {
-                $0.centerY.equalToSuperview()
-                $0.leading.equalTo(timeLabel.snp.trailing).offset(10)
-                $0.trailing.equalToSuperview().inset(10)
-            }
+        addressLabel.snp.makeConstraints {
+            $0.centerY.equalToSuperview()
+            $0.leading.equalTo(timeLabel.snp.trailing).offset(10)
+            $0.trailing.equalToSuperview().inset(10)
         }
     }
 }

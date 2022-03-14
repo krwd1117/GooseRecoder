@@ -16,7 +16,6 @@
 		28710B7D27D46B89009A1D17 /* FSCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = 28710B7C27D46B89009A1D17 /* FSCalendar */; };
 		28710B8727D471B0009A1D17 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28710B8627D471B0009A1D17 /* CalendarViewController.swift */; };
 		28710B8A27D47263009A1D17 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28710B8927D47263009A1D17 /* Constants.swift */; };
-		28710B8C27D47453009A1D17 /* CalendarViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28710B8B27D47453009A1D17 /* CalendarViewController+Extension.swift */; };
 		28710B9027D4BE46009A1D17 /* DetailViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28710B8F27D4BE46009A1D17 /* DetailViewController+Extension.swift */; };
 		28720B6927D041A6001A1EAB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28720B6827D041A6001A1EAB /* AppDelegate.swift */; };
 		28720B6B27D041A6001A1EAB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28720B6A27D041A6001A1EAB /* SceneDelegate.swift */; };
@@ -47,7 +46,6 @@
 		28710B7927D46157009A1D17 /* MapMarker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapMarker.swift; sourceTree = "<group>"; };
 		28710B8627D471B0009A1D17 /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		28710B8927D47263009A1D17 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		28710B8B27D47453009A1D17 /* CalendarViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CalendarViewController+Extension.swift"; sourceTree = "<group>"; };
 		28710B8F27D4BE46009A1D17 /* DetailViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DetailViewController+Extension.swift"; sourceTree = "<group>"; };
 		28720B6527D041A6001A1EAB /* GooseRecoder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GooseRecoder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		28720B6827D041A6001A1EAB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -100,7 +98,6 @@
 			isa = PBXGroup;
 			children = (
 				28710B8627D471B0009A1D17 /* CalendarViewController.swift */,
-				28710B8B27D47453009A1D17 /* CalendarViewController+Extension.swift */,
 			);
 			path = Calendar;
 			sourceTree = "<group>";
@@ -327,7 +324,6 @@
 			files = (
 				2872B8F927D8B4B4006CC081 /* SettingTableViewCell.swift in Sources */,
 				28710B8727D471B0009A1D17 /* CalendarViewController.swift in Sources */,
-				28710B8C27D47453009A1D17 /* CalendarViewController+Extension.swift in Sources */,
 				2823514F27D3AB94002D4803 /* DetailViewController.swift in Sources */,
 				28710B7827D45E6F009A1D17 /* RecordItem.swift in Sources */,
 				288EC02527D07855000171DE /* Record.swift in Sources */,
@@ -424,7 +420,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -479,7 +475,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -505,6 +501,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -535,6 +532,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
