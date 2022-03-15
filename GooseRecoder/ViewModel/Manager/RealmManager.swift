@@ -10,11 +10,12 @@ import RealmSwift
 
 class RealmManager: NSObject {
     
+    let realm = try! Realm()
+    
     static let shared = RealmManager()
     
     var records: Results<Record>!
-    let realm = try! Realm()
- 
+    
 }
 
 // MARK: - Record
@@ -79,6 +80,6 @@ extension RealmManager {
                 print("ERROR: \(error.localizedDescription)")
             }
     }
-    
+
 }
 

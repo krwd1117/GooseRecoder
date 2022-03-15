@@ -10,6 +10,7 @@
 		2823514F27D3AB94002D4803 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2823514E27D3AB94002D4803 /* DetailViewController.swift */; };
 		2823515227D3B3F4002D4803 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 2823515127D3B3F4002D4803 /* Realm */; };
 		2823515427D3B3F4002D4803 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 2823515327D3B3F4002D4803 /* RealmSwift */; };
+		286A4AF927E01DF900BAC340 /* RecordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286A4AF827E01DF900BAC340 /* RecordViewModel.swift */; };
 		28710B7627D45374009A1D17 /* GlobalFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28710B7527D45374009A1D17 /* GlobalFunctions.swift */; };
 		28710B7827D45E6F009A1D17 /* RecordItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28710B7727D45E6E009A1D17 /* RecordItem.swift */; };
 		28710B7A27D46157009A1D17 /* MapMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28710B7927D46157009A1D17 /* MapMarker.swift */; };
@@ -42,6 +43,7 @@
 
 /* Begin PBXFileReference section */
 		2823514E27D3AB94002D4803 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		286A4AF827E01DF900BAC340 /* RecordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordViewModel.swift; sourceTree = "<group>"; };
 		28710B7527D45374009A1D17 /* GlobalFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalFunctions.swift; sourceTree = "<group>"; };
 		28710B7727D45E6E009A1D17 /* RecordItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordItem.swift; sourceTree = "<group>"; };
 		28710B7927D46157009A1D17 /* MapMarker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapMarker.swift; sourceTree = "<group>"; };
@@ -90,6 +92,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		286A4AFA27E01E4D00BAC340 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				28FE9A1F27DE104000664DBB /* LocationManager.swift */,
+				28FE9A2127DE1F9100664DBB /* RealmManager.swift */,
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
 		28710B8827D47205009A1D17 /* Main */ = {
 			isa = PBXGroup;
 			children = (
@@ -139,7 +150,7 @@
 				28FE9A1D27DDF68100664DBB /* ViewModel */,
 				28720B8627D041F5001A1EAB /* View */,
 				28720B8527D041F3001A1EAB /* Controller */,
-				28720B8427D041F1001A1EAB /* API */,
+				28720B8427D041F1001A1EAB /* Service */,
 				28720B8327D041EF001A1EAB /* Utils */,
 				28720B6827D041A6001A1EAB /* AppDelegate.swift */,
 				28720B6A27D041A6001A1EAB /* SceneDelegate.swift */,
@@ -174,13 +185,11 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
-		28720B8427D041F1001A1EAB /* API */ = {
+		28720B8427D041F1001A1EAB /* Service */ = {
 			isa = PBXGroup;
 			children = (
-				28FE9A1F27DE104000664DBB /* LocationManager.swift */,
-				28FE9A2127DE1F9100664DBB /* RealmManager.swift */,
 			);
-			path = API;
+			path = Service;
 			sourceTree = "<group>";
 		};
 		28720B8527D041F3001A1EAB /* Controller */ = {
@@ -232,6 +241,8 @@
 		28FE9A1D27DDF68100664DBB /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				286A4AFA27E01E4D00BAC340 /* Manager */,
+				286A4AF827E01DF900BAC340 /* RecordViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -342,6 +353,7 @@
 				2872B8F227D8B0FA006CC081 /* Global.swift in Sources */,
 				28720B6D27D041A6001A1EAB /* ViewController.swift in Sources */,
 				28710B8A27D47263009A1D17 /* Constants.swift in Sources */,
+				286A4AF927E01DF900BAC340 /* RecordViewModel.swift in Sources */,
 				288EC02027D06FB2000171DE /* MainViewController+Extension.swift in Sources */,
 				288EC02927D08634000171DE /* MainTableViewCell.swift in Sources */,
 				2872B8F427D8B383006CC081 /* SettingTableViewController+Extension.swift in Sources */,
@@ -530,7 +542,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2.1;
+				MARKETING_VERSION = 1.2.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.krwd.GooseRecoder;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -564,7 +576,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2.1;
+				MARKETING_VERSION = 1.2.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.krwd.GooseRecoder;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
